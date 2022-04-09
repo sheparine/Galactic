@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galactic.DriveScanner.App", "Galactic.DriveScanner.App\Galactic.DriveScanner.App.csproj", "{1DC2141D-C2E9-4C7B-AC09-1929E6BF91C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DC2141D-C2E9-4C7B-AC09-1929E6BF91C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC2141D-C2E9-4C7B-AC09-1929E6BF91C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC2141D-C2E9-4C7B-AC09-1929E6BF91C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC2141D-C2E9-4C7B-AC09-1929E6BF91C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7965D725-BD17-4E61-8479-A7A6436D1A65}
+	EndGlobalSection
+EndGlobal
