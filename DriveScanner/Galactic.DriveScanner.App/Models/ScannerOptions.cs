@@ -12,5 +12,7 @@ namespace Galactic.DriveScanner.App.Models
         public List<SearchPattern> SearchPatterns { get; set; }
 
         public string OutputFile { get; set; }
+
+        public string FileSearchPattern { get; set; }
     }
 }

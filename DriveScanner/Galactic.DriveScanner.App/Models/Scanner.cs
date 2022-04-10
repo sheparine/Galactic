@@ -38,9 +38,8 @@ namespace Galactic.DriveScanner.App.Models
             try
             {
                 Console.WriteLine($"Processing drive {driveInfo.Name}");
-
-                var searchPattern = "*.txt";
-                ProcessFiles(driveInfo.RootDirectory.FullName, searchPattern);
+;
+                ProcessFiles(driveInfo.RootDirectory.FullName, _options.FileSearchPattern);
             }
             catch (Exception ex)
             {
@@ -104,9 +103,7 @@ namespace Galactic.DriveScanner.App.Models
         {
             foreach (var searchPattern in _options.SearchPatterns)
             {
-                var match = searchPattern.Regex.Match(line);
-
-                if (match.Success)
+                if (searchPattern.MatchFound(line))
                 {
                     var message = $"{filePath} - ({ searchPattern.Name})";
                     Console.WriteLine(message);

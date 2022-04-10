@@ -29,5 +29,12 @@ namespace Galactic.DriveScanner.App.Models
         public string Name { get; set; }
 
         public Regex Regex { get; private set; }
+
+        public bool MatchFound(string text)
+        {
+            var match = Regex.Match(text);
+
+            return match.Success;
+        }
     }
 }
