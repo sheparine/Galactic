@@ -85,7 +85,7 @@ namespace Galactic.DriveScanner.App.Models
             {
                 if (searchPattern.MatchFound(line))
                 {
-                    var message = $"{filePath} - ({ searchPattern.Name})";
+                    var message = $"{filePath} - {searchPattern.Name} (Match Score {searchPattern.MatchScore})";
                     Console.WriteLine(message);
                     using StreamWriter file = new(_options.OutputFile, append: true);
                     file.WriteLineAsync(message);

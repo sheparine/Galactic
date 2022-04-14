@@ -28,6 +28,8 @@ namespace Galactic.DriveScanner.App.Models
 
         public string Name { get; set; }
 
+        public int MatchScore { get; set; }
+
         public bool MatchFound(string text)
         {
             var match = _regex.Match(text);

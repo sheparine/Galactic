@@ -7,7 +7,9 @@ namespace Galactic.DriveScanner.UnitTests
     {
         private SearchPattern _creditCardSearchPattern = new SearchPattern();
 
-        private SearchPattern _socialSecuritySearchPattern = new SearchPattern();
+        private SearchPattern _socialSecuritySearchPattern1 = new SearchPattern();
+
+        private SearchPattern _socialSecuritySearchPattern2 = new SearchPattern();
 
         [SetUp]
         public void Setup()
@@ -17,9 +19,14 @@ namespace Galactic.DriveScanner.UnitTests
                 Pattern = "\\b\\d{4} \\d{4} \\d{4} \\d{4}\\b"
             };
 
-            _socialSecuritySearchPattern = new SearchPattern
+            _socialSecuritySearchPattern1 = new SearchPattern
             {
                 Pattern = "\\b\\d{3}-\\d{2}-\\d{4}\\b"
+            };
+
+            _socialSecuritySearchPattern2 = new SearchPattern
+            {
+                Pattern = ".*(social security)+.*(\\d{3}-\\d{2}-\\d{4})+|.*(\\d{3}-\\d{2}-\\d{4})+.*(social security)+.*"
             };
         }
 
@@ -36,13 +43,21 @@ namespace Galactic.DriveScanner.UnitTests
         }
 
         [Test]
-        public void TestSocialSecuritySearchPattern()
+        public void TestSocialSecuritySearchPattern1()
         {
-            Assert.True(_socialSecuritySearchPattern.MatchFound("444-44-4444"));
-            Assert.False(_socialSecuritySearchPattern.MatchFound("44444-4444"));
-            Assert.False(_socialSecuritySearchPattern.MatchFound("444-444444"));
-            Assert.False(_socialSecuritySearchPattern.MatchFound("444444444"));
-            Assert.False(_socialSecuritySearchPattern.MatchFound("444-i4-4444"));
+            Assert.True(_socialSecuritySearchPattern1.MatchFound("444-44-4444"));
+            Assert.False(_socialSecuritySearchPattern1.MatchFound("44444-4444"));
+            Assert.False(_socialSecuritySearchPattern1.MatchFound("444-444444"));
+            Assert.False(_socialSecuritySearchPattern1.MatchFound("444444444"));
+            Assert.False(_socialSecuritySearchPattern1.MatchFound("444-i4-4444"));
+        }
+
+        [Test]
+        public void TestSocialSecuritySearchPattern2()
+        {
+            Assert.False(_socialSecuritySearchPattern2.MatchFound("444-44-4444"));
+            Assert.True(_socialSecuritySearchPattern1.MatchFound("444-44-4444 Social Security"));
+            Assert.True(_socialSecuritySearchPattern1.MatchFound("Social Security 444-44-4444"));
         }
     }
 }

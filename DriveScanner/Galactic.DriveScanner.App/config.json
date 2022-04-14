@@ -3,11 +3,18 @@
     "SearchPatterns": [
       {
         "Name": "Credit Card",
-        "Pattern": "\\b\\d{4} \\d{4} \\d{4} \\d{4}\\b"
+        "Pattern": "\\b\\d{4} \\d{4} \\d{4} \\d{4}\\b",
+        "MatchScore": 1
       },
       {
-        "Name": "Social Security",
-        "Pattern": "\\b\\d{3}-\\d{2}-\\d{4}\\b"
+        "Name": "Social Security Generic",
+        "Pattern": "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+        "MatchScore": 1
+      },
+      {
+        "Name": "Social Security Specific",
+        "Pattern": ".*(social security)+.*(\\d{3}-\\d{2}-\\d{4})+|.*(\\d{3}-\\d{2}-\\d{4})+.*(social security)+.*",
+        "MatchScore": 2
       }
     ],
     "FileExtensions": [ ".doc", ".txt" ]
