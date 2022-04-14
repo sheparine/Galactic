@@ -11,7 +11,7 @@ namespace Galactic.DriveScanner.App.Models
             File.Delete(_options.OutputFile);
         }
 
-        public void ProcessComputer()
+        public async Task ProcessComputerAsync()
         {
             try
             {
@@ -23,7 +23,7 @@ namespace Galactic.DriveScanner.App.Models
                 {
                     if (d.IsReady)
                     {
-                        ProcessDrive(d);
+                        await ProcessDriveAsync(d);
                     }
                 }
             }
@@ -33,7 +33,7 @@ namespace Galactic.DriveScanner.App.Models
             }
         }
 
-        protected void ProcessDrive(DriveInfo driveInfo)
+        protected async Task ProcessDriveAsync(DriveInfo driveInfo)
         {
             Console.WriteLine($"Processing drive {driveInfo.Name}");
 
@@ -52,7 +52,7 @@ namespace Galactic.DriveScanner.App.Models
                     var fi = new FileInfo(fileName);
                     if (_options.FileExtensions.Contains(fi.Extension))
                     {
-                        ProcessFile(fileName);
+                        await ProcessFileAsync(fileName);
                     }
                 }
                 catch (Exception ex)
@@ -62,7 +62,7 @@ namespace Galactic.DriveScanner.App.Models
             }
         }
 
-        protected void ProcessFile(string filePath)
+        protected async Task ProcessFileAsync(string filePath)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace Galactic.DriveScanner.App.Models
 
                 foreach (var line in File.ReadLines(filePath))
                 {
-                    ProcessLine(filePath, line);
+                    await ProcessLineAsync(filePath, line);
                 }
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace Galactic.DriveScanner.App.Models
             }
         }
 
-        protected void ProcessLine(string filePath, string line)
+        protected async Task ProcessLineAsync(string filePath, string line)
         {
             foreach (var searchPattern in _options.SearchPatterns)
             {
@@ -88,7 +88,7 @@ namespace Galactic.DriveScanner.App.Models
                     var message = $"{filePath} - {searchPattern.Name} (Match Score {searchPattern.MatchScore})";
                     Console.WriteLine(message);
                     using StreamWriter file = new(_options.OutputFile, append: true);
-                    file.WriteLineAsync(message);
+                    await file.WriteLineAsync(message);
                 }
             }
         }

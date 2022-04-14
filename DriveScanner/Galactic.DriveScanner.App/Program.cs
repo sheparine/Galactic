@@ -13,7 +13,7 @@ namespace Galactic.DriveScanner.App
 
             var scanner = new Scanner(options);
 
-            scanner.ProcessComputer();
+            scanner.ProcessComputerAsync();
 
             Console.WriteLine("Drive Scan Complete");
         }
