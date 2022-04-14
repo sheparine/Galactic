@@ -35,49 +35,25 @@ namespace Galactic.DriveScanner.App.Models
 
         protected void ProcessDrive(DriveInfo driveInfo)
         {
-            try
-            {
-                Console.WriteLine($"Processing drive {driveInfo.Name}");
-;
-                ProcessFiles(driveInfo.RootDirectory.FullName, _options.FileSearchPattern);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.InnerException);
-            }
-        }
+            Console.WriteLine($"Processing drive {driveInfo.Name}");
 
-        protected void ProcessFiles(string path, string searchPattern)
-        {
-            List<string> folders = new List<string>() { path };
-            int folCount = 1;
+            var enumerationOptions = new EnumerationOptions 
+            { 
+                IgnoreInaccessible = true,
+                RecurseSubdirectories = true
+            };
 
-            for (int i = 0; i < folCount; i++)
+            var files = Directory.EnumerateFiles(driveInfo.RootDirectory.FullName, "*", enumerationOptions);
+
+            foreach (var file in files)
             {
                 try
                 {
-                    foreach (var newDir in Directory.EnumerateDirectories(folders[i], "*", SearchOption.TopDirectoryOnly))
-                    {
-                        folders.Add(newDir);
-                        folCount++;
-                        try
-                        {
-
-                            foreach (var file in Directory.EnumerateFiles(newDir, searchPattern))
-                            {
-                                ProcessFile(file);
-                            }
-                        }
-                        catch (UnauthorizedAccessException)
-                        {
-                            // Failed to read a File, skipping it.
-                        }
-                    }
+                    ProcessFile(file);
                 }
-                catch (UnauthorizedAccessException)
+                catch (Exception ex)
                 {
-                    // Failed to read a Folder, skipping it.
-                    continue;
+                    Console.WriteLine(ex.InnerException);
                 }
             }
         }
