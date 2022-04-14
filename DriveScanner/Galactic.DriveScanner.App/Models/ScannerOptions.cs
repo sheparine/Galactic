@@ -7,12 +7,13 @@ namespace Galactic.DriveScanner.App.Models
         {
             SearchPatterns = new List<SearchPattern>();
             OutputFile = "output.txt";
+            FileExtensions = new List<string>();
         }
 
         public List<SearchPattern> SearchPatterns { get; set; }
 
         public string OutputFile { get; set; }
 
-        public string FileSearchPattern { get; set; }
+        public List<string> FileExtensions { get; set; }
     }
 }

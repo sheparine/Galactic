@@ -43,13 +43,17 @@ namespace Galactic.DriveScanner.App.Models
                 RecurseSubdirectories = true
             };
 
-            var files = Directory.EnumerateFiles(driveInfo.RootDirectory.FullName, "*", enumerationOptions);
+            var fileNames = Directory.EnumerateFiles(driveInfo.RootDirectory.FullName, "*", enumerationOptions);
 
-            foreach (var file in files)
+            foreach (var fileName in fileNames)
             {
                 try
                 {
-                    ProcessFile(file);
+                    var fi = new FileInfo(fileName);
+                    if (_options.FileExtensions.Contains(fi.Extension))
+                    {
+                        ProcessFile(fileName);
+                    }
                 }
                 catch (Exception ex)
                 {
