@@ -17,9 +17,9 @@ namespace Galactic.DriveScanner.App.Models
             {
                 Console.WriteLine($"Processing computer {Environment.MachineName}");
 
-                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                var allDrives = DriveInfo.GetDrives();
 
-                foreach (DriveInfo d in allDrives)
+                foreach (var d in allDrives)
                 {
                     if (d.IsReady)
                     {

@@ -1,17 +1,17 @@
-﻿
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace Galactic.DriveScanner.App.Models
 {
     public class SearchPattern
     {
+        private string _pattern = "";
+        private Regex _regex;
+
         public SearchPattern()
         {
             Name = "";
             Pattern = "";
         }
-
-        private string _pattern = "";
 
         public string Pattern 
         {
@@ -22,17 +22,15 @@ namespace Galactic.DriveScanner.App.Models
             set
             {
                 _pattern = value;
-                Regex = new Regex(value);
+                _regex = new Regex(value);
             }
         }
 
         public string Name { get; set; }
 
-        public Regex Regex { get; private set; }
-
         public bool MatchFound(string text)
         {
-            var match = Regex.Match(text);
+            var match = _regex.Match(text);
 
             return match.Success;
         }
